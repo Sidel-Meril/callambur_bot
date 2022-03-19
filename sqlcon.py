@@ -137,20 +137,4 @@ class Database:
             self.conn.close()
 
 if __name__ == "__main__":
-    users = open("D:\PyProjects\my_users.txt", 'r').read().split('\n')
-    users = list(filter(lambda line: 'new user detected' in line, users))
-    users = list(map(lambda line: int(line.replace('new user detected','')), users))
-    db = Database('postgres://rslvvjpdsdkpgg:7ceaba1d59e559453ae4cefdbc1b96e3a62cfb4455446059cb6ec6d58d22bbbe@ec2-44-195-191-252.compute-1.amazonaws.com:5432/ddrkkg75nsm2ho')
-    db.create_tables()
-    # for user_id in users:
-    #     try:
-    #         db.add_user(user_id)
-    #     except:
-    #         pass
-    # db.another_query()
-    links = open(r'D:\PyProjects\addblock_master_botstorage_links.txt', 'r').read().split('\n')
-    links.extend(open(r'D:\PyProjects\ukrainian_war_updates_links_p.txt', 'r').read().split('\n'))
-
-    for link in links:
-        w_size, w_point = imageprocessing.get_coords(link)
-        db.add_pic(link,w_size, w_point)
+    pass
