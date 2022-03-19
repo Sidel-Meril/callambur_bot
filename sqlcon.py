@@ -25,7 +25,7 @@ class Database:
         user_id bigint PRIMARY KEY NOT NULL
         )"""
 
-        self.cur.execute(query)
+        # self.cur.execute(query)
 
         # Create pics table
         query = """CREATE TABLE sources(
@@ -42,7 +42,7 @@ class Database:
 
     @_conn
     def another_query(self):
-        query = """SELECT * FROM USERS;
+        query = """DROP TABLE Sources;
         """
         # query="""ALTER TABLE sources DROP CONSTRAINT ix_sources;
         # """
@@ -52,8 +52,8 @@ class Database:
         # query = """ALTER SYSTEM SET block_size = '1073741824';
         # """
         self.cur.execute(query)
-        result = self.cur.fetchall()
-        print(result)
+        # result = self.cur.fetchall()
+        # print(result)
         self.conn.commit()
 
     @_conn
@@ -141,15 +141,16 @@ if __name__ == "__main__":
     users = list(filter(lambda line: 'new user detected' in line, users))
     users = list(map(lambda line: int(line.replace('new user detected','')), users))
     db = Database('postgres://rslvvjpdsdkpgg:7ceaba1d59e559453ae4cefdbc1b96e3a62cfb4455446059cb6ec6d58d22bbbe@ec2-44-195-191-252.compute-1.amazonaws.com:5432/ddrkkg75nsm2ho')
-    # db.create_tables()
+    db.create_tables()
     # for user_id in users:
     #     try:
     #         db.add_user(user_id)
     #     except:
     #         pass
-    links = open('addblock_master_botstorage_links.txt', 'r').read().split('\n')
-    links.extend(open('ukrainian_war_updates_links_p.txt', 'r').read().split('\n'))
+    # db.another_query()
+    links = open(r'D:\PyProjects\addblock_master_botstorage_links.txt', 'r').read().split('\n')
+    links.extend(open(r'D:\PyProjects\ukrainian_war_updates_links_p.txt', 'r').read().split('\n'))
 
     for link in links:
         w_size, w_point = imageprocessing.get_coords(link)
-        db.add_pic(link,w_point, w_size)
+        db.add_pic(link,w_size, w_point)

@@ -45,6 +45,7 @@ def user(func):
 def admin(func):
     def wrapper(update, context, *args, **kwargs):
         user_id = update.message.chat.id
+        print(user_id, variables['telegram']['admin_id'], user_id == variables['telegram']['admin_id'])
         if user_id != variables['telegram']['admin_id']:
             return None
         print('Hi, my little queen Sidel Meril')
