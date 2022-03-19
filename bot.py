@@ -13,7 +13,7 @@ import os
 variables = {
   "telegram": {
     "token": os.environ['TELEGRAM_TOKEN'],
-    "admin_id": os.environ['ADMIN_ID']
+    "admin_id": int(os.environ['ADMIN_ID'])
   },
   "database": {
     "link": os.environ['DATABASE_URL']}
