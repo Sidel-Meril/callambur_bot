@@ -150,8 +150,6 @@ def create_add_from_gif(update, context):
     db = sqlcon.Database(variables['database']['link'])
     add = db.get_random_pic()[0]
     db.close()
-    for frame in user_gif:
-        frame.save('test.gif')
     frames=imageprocessing.set_frames(user_gif, add[1], (add[2], add[3]), (add[4], add[5]))
     bio = imageprocessing.conver_gif_to_bio(frames)
     updater.dispatcher.bot.send_animation(chat_id=user_id, animation=bio)
@@ -170,8 +168,6 @@ def create_add_from_sticker(update, context):
         db = sqlcon.Database(variables['database']['link'])
         add = db.get_random_pic()[0]
         db.close()
-        for frame in user_gif:
-            frame.save('test.gif')
         frames = imageprocessing.set_frames(user_gif, add[1], (add[2], add[3]), (add[4], add[5]))
         bio = imageprocessing.conver_gif_to_bio(frames)
     else:
