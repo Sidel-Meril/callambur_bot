@@ -334,6 +334,6 @@ if __name__=="__main__":
     updater.start_webhook(listen="0.0.0.0",
                           port=PORT,
                           url_path=variables['telegram']['token'],
-                        webhook_url = 'https://callamburbot.herokuapp.com/' + variables['telegram']['token'])
+                        webhook_url = 'https://shrouded-beach-91892.herokuapp.com/' + variables['telegram']['token'])
     updater.idle()
 
