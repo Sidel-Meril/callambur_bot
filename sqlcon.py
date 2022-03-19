@@ -1,5 +1,8 @@
 import psycopg2
 
+import imageprocessing
+
+
 class Database:
     def __init__(self, database_url):
         try:
@@ -18,11 +21,11 @@ class Database:
     @_conn
     def create_tables(self):
         # # Create user table
-        # query="""CREATE TABLE users(
-        # user_id bigint PRIMARY KEY NOT NULL
-        # )"""
-        #
-        # self.cur.execute(query)
+        query="""CREATE TABLE users(
+        user_id bigint PRIMARY KEY NOT NULL
+        )"""
+
+        self.cur.execute(query)
 
         # Create pics table
         query = """CREATE TABLE sources(
@@ -134,4 +137,19 @@ class Database:
             self.conn.close()
 
 if __name__ == "__main__":
-    pass
+    users = open("D:\PyProjects\my_users.txt", 'r').read().split('\n')
+    users = list(filter(lambda line: 'new user detected' in line, users))
+    users = list(map(lambda line: int(line.replace('new user detected','')), users))
+    db = Database('postgres://rslvvjpdsdkpgg:7ceaba1d59e559453ae4cefdbc1b96e3a62cfb4455446059cb6ec6d58d22bbbe@ec2-44-195-191-252.compute-1.amazonaws.com:5432/ddrkkg75nsm2ho')
+    # db.create_tables()
+    # for user_id in users:
+    #     try:
+    #         db.add_user(user_id)
+    #     except:
+    #         pass
+    links = open('addblock_master_botstorage_links.txt', 'r').read().split('\n')
+    links.extend(open('ukrainian_war_updates_links_p.txt', 'r').read().split('\n'))
+
+    for link in links:
+        w_size, w_point = imageprocessing.get_coords(link)
+        db.add_pic(link,w_point, w_size)

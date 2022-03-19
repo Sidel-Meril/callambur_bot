@@ -16,7 +16,7 @@ variables = {
     "admin_id": os.environ['ADMIN_ID']
   },
   "database": {
-    "link": os.environ['HEROKU_POSTGRESQL_OLIVE_URL']}
+    "link": os.environ['DATABASE_URL']}
 }
 
 #init bot
@@ -65,7 +65,7 @@ def welcome(update, context):
         file_url = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnw6GLZgBpcaA5s_idbxI23TVcc4w7DgkR9GlR8WmcXqxyC-J6S7JikTWaRfoON62gPb4&usqp=CAU"
     user_pic=imageprocessing.get_img(file_url)
     db = sqlcon.Database(variables['database']['link'])
-    add = db.get_pic_by_id(13)[0]
+    add = db.get_pic_by_id(12)[0]
     print(add)
     result = imageprocessing.set_pic(user_pic, add[1], (add[2], add[3]), (add[4], add[5]))
     bio = imageprocessing.convert_to_bio(result)
