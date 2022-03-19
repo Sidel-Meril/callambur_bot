@@ -129,6 +129,7 @@ def create_add_from_pic(update, context):
         file_id = update.message.photo[-1].file_id
     except:
         file_id = update.message.reply_to_message.photo[-1].file_id
+    print(update.message)
     file = updater.dispatcher.bot.getFile(file_id)
     file_url = file.file_path
     user_pic = imageprocessing.get_img(file_url)
