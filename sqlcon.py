@@ -21,9 +21,9 @@ class Database:
     @_conn
     def create_tables(self):
         # # Create user table
-        query="""CREATE TABLE users(
-        user_id bigint PRIMARY KEY NOT NULL
-        )"""
+        # query="""CREATE TABLE users(
+        # user_id bigint PRIMARY KEY NOT NULL
+        # )"""
 
         # self.cur.execute(query)
 
@@ -137,4 +137,15 @@ class Database:
             self.conn.close()
 
 if __name__ == "__main__":
-    pass
+    db = Database(
+'postgres://rslvvjpdsdkpgg:7ceaba1d59e559453ae4cefdbc1b96e3a62cfb4455446059cb6ec6d58d22bbbe@ec2-44-195-191-252.compute-1.amazonaws.com:5432/ddrkkg75nsm2ho'
+    )
+    db.another_query()
+    db.create_tables()
+    for link in open(r'd:\links.txt','r').read().split('\n'):
+        url = '%s/image.jpg' %link.replace('ibb.co','i.ibb.co')
+        size, point = imageprocessing.get_coords(url)
+        try:
+            db.add_pic(url, size, point)
+        except:
+            pass

@@ -294,9 +294,9 @@ def get_all_pics_from_db(update, context):
         counter = 0
         while True:
             try:
-                counter+=1
                 print(counter)
                 updater.bot.send_message(chat_id=variables['telegram']['admin_id'], text='\n'.join(res_markdown[20*counter:20*(counter+1)]), parse_mode='HTML')
+                counter+=1
             except:
                 # updater.bot.send_message(chat_id=variables['telegram']['admin_id'], text='\n'.join(res_markdown[20*counter:]), parse_mode='HTML')
                 break
