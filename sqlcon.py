@@ -136,5 +136,3 @@ class Database:
     def close(self):
             self.conn.close()
 
-if __name__ == "__main__":
-    pass
